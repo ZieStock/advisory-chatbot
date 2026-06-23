@@ -1,2 +1,3 @@
 from .user_repository import UserRepository
 from .messages_repository import MessagesRepository
+from .watchlists_repository import WatchListsRepository
