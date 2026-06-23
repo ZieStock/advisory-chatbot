@@ -1,7 +1,8 @@
 from database import Base
 from sqlalchemy import Column, Enum, String, Integer, Boolean
 from enums import UserStatus, UserRole
-class UserEntity(Base):
+from .base_time import BaseTime
+class UserEntity(Base, BaseTime):
     __tablename__ = 'users'
     id = Column(Integer, index=True, primary_key=True)
     username = Column(String, unique=True, nullable=False)

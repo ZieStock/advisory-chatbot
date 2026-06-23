@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import UserRoutes, AuthRouter
+from routes import UserRoutes, AuthRouter, MessagesRouter
 from exception import GlobalException
 from database import Base, engine
 Base.metadata.create_all(bind=engine)
@@ -15,3 +15,4 @@ app.add_middleware(
 )
 app.include_router(UserRoutes)
 app.include_router(AuthRouter)
+app.include_router(MessagesRouter)

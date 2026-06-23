@@ -9,6 +9,7 @@ class Errorcode(Enum):
     USER_BLOCKED = (3002, "Tài khoản đã bị khóa")
     TOKEN_INVALID = (4001, "Token không hợp lệ")
     TOKEN_EXPIRED = (4001, "Token đã hết hạn")
+    MESSAGE_NOT_FOUND = (5001, "Không tìm thấy tin nhắn")
     def __init__(self, code: int, message: str):
         self.code = code
         self.message = message
