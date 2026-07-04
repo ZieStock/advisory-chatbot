@@ -1,12 +1,10 @@
 from fastapi import APIRouter, Depends, WebSocket, Query
-from service import ChatService
+from service.chat_service import chat_service
 from core import decode_token
 from database import get_db
 from typing import Optional
 
 router = APIRouter(prefix="/ws", tags=["Chat"])
-
-chat_service = ChatService()
 
 @router.websocket("/chat")
 async def websocket_endpoint(websocket: WebSocket, token: Optional[str] = Query(None), db = Depends(get_db)):

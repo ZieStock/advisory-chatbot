@@ -1,0 +1,7 @@
+kafka:
+  BOOTSTRAP_SERVERS: 9094
+  auto_offset_reset: 'earliest'
+  enable_auto_commit: True
+  group_id: 'stock'
+  topic:
+    - cafef

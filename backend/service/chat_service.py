@@ -1,6 +1,6 @@
 from fastapi import WebSocket, WebSocketDisconnect
 from chatbot.chatbot_service import ChatbotService
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 from sqlalchemy.orm import Session
 from util import get_logger
 import asyncio
@@ -10,7 +10,8 @@ logger = get_logger(__name__)
 class ChatService:
     def __init__(self):
         self.bot = ChatbotService()
-        self.active: Optional[Dict[Any, str]] = {}
+        self.active: Dict[Any, WebSocket] = {}
+        logger.info(f"CHAT SERVICE INIT ID = {id(self)}")
     async def connect(self, websocket: WebSocket, user_info: Dict[Any, str]):
         self.active[user_info['id']] = websocket
         logger.info(f"Kết nối thành công đến {user_info['name']}")
@@ -27,7 +28,15 @@ class ChatService:
                 await websocket.send_text(res)
         except WebSocketDisconnect:
             logger.warning("Lỗi kết nối đến websocket")
-            self.disconnect(user_info)
+            await self.disconnect(user_info)
         except Exception as e:
             logger.debug(f"Lỗi không xác định {e}")
-            self.disconnect(user_info)
+            await self.disconnect(user_info)
+    async def send_message_async(self, ws: Any, message: str) -> bool:
+        try:
+            await ws.send_text(message)
+            return True
+        except Exception as e:
+            logger.debug(f"Ignore WS send error: {e}")
+            return False
+chat_service = ChatService()

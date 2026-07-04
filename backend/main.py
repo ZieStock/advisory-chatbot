@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from routes import UserRoutes, AuthRouter, MessagesRouter, WatchListsRouter, ChatRouter
 from exception import GlobalException
 from database import Base, engine
+from service import KafkaService
+import asyncio
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -18,3 +20,7 @@ app.include_router(AuthRouter)
 app.include_router(MessagesRouter)
 app.include_router(WatchListsRouter)
 app.include_router(ChatRouter)
+@app.on_event("startup")
+async def startup_event():
+    kafka_service = KafkaService(topic="signal") 
+    asyncio.create_task(kafka_service.run())

@@ -17,6 +17,9 @@ class WatchListsRepository:
     def get_by_watchlists(db: Session, user_id: int, watchlists_id):
         return db.query(WatchListEntity).filter(WatchListEntity.id  == watchlists_id, WatchListEntity.user_id == user_id).first()
     @staticmethod
+    def get_by_symbol(db: Session, symbol: str):
+        return db.query(WatchListEntity).filter(WatchListEntity.symbol == symbol).all()
+    @staticmethod
     def get_all_by_user(db: Session, user_id: int):
         return db.query(WatchListEntity).filter(WatchListEntity.user_id == user_id).all()
     @staticmethod

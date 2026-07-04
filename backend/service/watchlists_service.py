@@ -16,6 +16,9 @@ class WatchListsService:
     def get_by_watchlists(db: Session, user_id: int, watchlists_id: int):
         return WatchListsRepository.get_by_watchlists(db, user_id, watchlists_id)
     @staticmethod
+    def get_by_symbol(db: Session, symbol: str):
+        return WatchListsRepository.get_by_symbol(db, symbol)
+    @staticmethod
     def get_all_by_user(db: Session, user_id: int):
         Watchlists = WatchListsRepository.get_all_by_user(db, user_id)
         return [WatchListsResponse.model_validate(watchlists) for watchlists in Watchlists]
