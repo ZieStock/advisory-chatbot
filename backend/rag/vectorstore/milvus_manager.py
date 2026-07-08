@@ -1,7 +1,7 @@
 from pymilvus import MilvusClient, DataType
 
 class MilvusManager:
-    def __init__(self, collection_name):
+    def __init__(self, collection_name = 'news'):
         self.client = MilvusClient()
         self.collection_name = collection_name
     def get_or_create_collection(self):
@@ -23,7 +23,7 @@ class MilvusManager:
             index_type="IVF_FLAT",
             params={"nlist": 384}
         )
-        self.client.create_collection(collection_name=self.collection_name, schema=schema,index_params=index_params, properties={"collection.ttl.seconds": 1209600})
+        self.client.create_collection(collection_name=self.collection_name, schema=schema,index_params=index_params, properties={"collection.ttl.seconds": 31536000})
         return self.client.load_collection(self.collection_name)
     def insert_data(self, data: list):
         return self.client.insert(self.collection_name, data)

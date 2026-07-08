@@ -6,7 +6,7 @@ from util import parseTime
 
 class RagService:
     def __init__(self):
-        self.milvus = MilvusManager("news")
+        self.milvus = MilvusManager()
         self.embedding = EmbeddingService()
         self.milvus.get_or_create_collection()
         self.chunker = Chunker(chunk_size=1200, chunk_overlap=400)
