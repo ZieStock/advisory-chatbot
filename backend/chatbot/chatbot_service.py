@@ -1,6 +1,7 @@
 from chatbot.build_agent import BuildAgent
 from chatbot.model import get_llm
 from chatbot.system_prompt import SystemPrompt
+from chatbot.tools import build_tool
 from typing import Dict, Any
 from sqlalchemy.orm import Session
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
@@ -12,7 +13,9 @@ logger = get_logger(__name__)
 
 class ChatbotService:
     def __init__(self):
-        self.agent = BuildAgent(get_llm())
+        tools = build_tool()
+        llm_with_tools = get_llm().bind_tools(tools)
+        self.agent = BuildAgent(llm_with_tools, tools)
     def chat(self, messages: str, db: Session, user_info: Dict[str, Any], bot_name: str = 'chatbot chứng khoản'):
         thread_id = str(user_info.get("id", "0"))
         system_prompt = SystemPrompt(bot_name)
