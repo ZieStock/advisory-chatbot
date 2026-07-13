@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import UserRoutes, AuthRouter, MessagesRouter, WatchListsRouter, ChatRouter
+from routes import UserRoutes, AuthRouter, MessagesRouter, WatchListsRouter, ChatRouter, BigQueryRouter, RAGRouter
 from exception import GlobalException
 from database import Base, engine
 from service import KafkaService
@@ -20,6 +20,8 @@ app.include_router(AuthRouter)
 app.include_router(MessagesRouter)
 app.include_router(WatchListsRouter)
 app.include_router(ChatRouter)
+app.include_router(BigQueryRouter)
+app.include_router(RAGRouter)
 @app.on_event("startup")
 async def startup_event():
     kafka_service = KafkaService(topic="signal") 

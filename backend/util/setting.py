@@ -6,6 +6,9 @@ class Setting(BaseSettings):
     VM_IP: str
     MILVUS_HOST: str
     MILVUS_PORT: str
+    KEY_GCP: str
+    PROJECT_ID: str
+    BIGQUERY_DATASET: str
     model_config = {
         'env_file': ".env"
     }
