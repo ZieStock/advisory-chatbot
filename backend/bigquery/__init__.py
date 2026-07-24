@@ -1,1 +1,1 @@
-from .bigquery_client import client
+from .bigquery_client import client, execute

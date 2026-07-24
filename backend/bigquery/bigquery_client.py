@@ -1,5 +1,4 @@
 from google.cloud import bigquery
-from google.oauth2 import service_account
 from google.oauth2.service_account import Credentials
 from util import load_setting
 
@@ -10,3 +9,9 @@ def get_bigquery_client():
         credentials=credentials,
     )
 client = get_bigquery_client()
+
+def execute(query: str, parameters = None):
+    job_config = bigquery.QueryJobConfig(
+        query_parameters=parameters or []
+    )
+    return list(client.query(query, job_config=job_config).result())

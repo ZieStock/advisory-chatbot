@@ -1,4 +1,4 @@
 from .user_repository import UserRepository
 from .messages_repository import MessagesRepository
 from .watchlists_repository import WatchListsRepository
-from .bigquery_repository import MarketIndexRepository, OhlcRepository, StockCompanyRepository, ForeignInvestorRepository
+from .bigquery_repository import MarketIndexRepository, OhlcRepository, StockCompanyRepository, ForeignInvestorRepository, QuoteRepository
