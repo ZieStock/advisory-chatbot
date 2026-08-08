@@ -9,6 +9,9 @@ class Setting(BaseSettings):
     KEY_GCP: str
     PROJECT_ID: str
     BIGQUERY_DATASET: str
+    REDIS_HOST: str
+    REDIS_PORT: str
+    REDIS_PASSWORD: str
     model_config = {
         'env_file': ".env"
     }

@@ -1,4 +1,5 @@
 from pydantic import BaseModel
 
 class AuthResponse(BaseModel):
-    token: str
+    access_token: str
+    refresh_token: str

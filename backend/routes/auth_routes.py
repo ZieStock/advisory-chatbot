@@ -7,3 +7,9 @@ router = APIRouter(prefix='/auth')
 @router.post('/login')
 def login(request: AuthRequest,db: session = Depends(get_db)):
     return AuthService.login(db, request)
+@router.post("/refresh")
+def refresh_token(token: str):
+    return AuthService.refresh_token(token)
+@router.post("/logout")
+def logout(token: str):
+    return AuthService.logout(token)
